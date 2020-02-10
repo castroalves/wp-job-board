@@ -150,3 +150,15 @@ function wpjb_change_post_content_type( $field ) {
     return $field;
 }
 add_filter( 'acf/get_valid_field', 'wpjb_change_post_content_type');
+
+function wpjb_after_password_reset()
+{
+    $redirect_to = add_query_arg(
+        'password_reset',
+        'Senha alterada com sucesso!',
+        home_url('/entrar')
+    );
+    wp_safe_redirect( $redirect_to );
+    exit;
+}
+add_action( 'after_password_reset', 'wpjb_after_password_reset' );
